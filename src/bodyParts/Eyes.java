@@ -6,7 +6,6 @@ import enums.Characteristics;
 import enums.ItemType;
 
 public class Eyes extends BodyPart {
-    private String name;
     private String color;
     private int quantity;
     private boolean closed;
