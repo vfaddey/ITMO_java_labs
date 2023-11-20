@@ -1,12 +1,14 @@
 package bodyParts;
 
 import aClasses.BodyPart;
+import aClasses.Creature;
+import enums.ItemType;
 
 public class Body extends BodyPart {
     private boolean isHeated;
 
-    public Body(String name) {
-        super(name);
+    public Body(String name, Creature owner) {
+        super(name, owner);
     }
 
     @Override
@@ -22,6 +24,11 @@ public class Body extends BodyPart {
 
     @Override
     public String getState() {
+        return null;
+    }
+
+    @Override
+    public ItemType getType() {
         return null;
     }
 

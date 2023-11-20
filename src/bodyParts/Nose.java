@@ -1,10 +1,14 @@
 package bodyParts;
 
 import aClasses.BodyPart;
+import aClasses.Creature;
+import enums.ItemType;
+
+import javax.script.ScriptEngine;
 
 public class Nose extends BodyPart {
-    public Nose() {
-        super("нос");
+    public Nose(String name, Creature owner) {
+        super(name, owner);
     }
 
     @Override
@@ -24,6 +28,11 @@ public class Nose extends BodyPart {
 
     @Override
     public String getState() {
+        return null;
+    }
+
+    @Override
+    public ItemType getType() {
         return null;
     }
 }

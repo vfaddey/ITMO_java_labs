@@ -1,16 +1,18 @@
 package bodyParts;
 
 import aClasses.BodyPart;
+import aClasses.Creature;
+import enums.ItemType;
 
 public class Face extends BodyPart {
     private boolean isHeated;
 
-    public Face(String name) {
-        super(name);
+    public Face(String name, Creature owner) {
+        super(name, owner);
     }
 
-    public Face(String name, boolean isHeated) {
-        super(name);
+    public Face(String name, Creature owner, boolean isHeated) {
+        super(name, owner);
         this.isHeated = isHeated;
     }
 
@@ -21,6 +23,11 @@ public class Face extends BodyPart {
 
     @Override
     public String getState() {
+        return null;
+    }
+
+    @Override
+    public ItemType getType() {
         return null;
     }
 

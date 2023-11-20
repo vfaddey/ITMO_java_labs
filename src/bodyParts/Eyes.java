@@ -3,19 +3,19 @@ package bodyParts;
 import aClasses.BodyPart;
 import aClasses.Creature;
 import enums.Characteristics;
+import enums.ItemType;
 
 public class Eyes extends BodyPart {
     private String name;
     private String color;
     private int quantity;
     private boolean closed;
-    private Creature owner;
     private boolean isHeated;
-    public Eyes(String name) {
-        super(name);
+    public Eyes(String name, Creature owner) {
+        super(name, owner);
     }
-    public Eyes(String color, boolean closed, int quantity) {
-        super("глаза");
+    public Eyes(String color, Creature owner, boolean closed, int quantity) {
+        super("глаза", owner);
         this.color = color;
         this.closed = closed;
         this.quantity = quantity;
@@ -24,7 +24,7 @@ public class Eyes extends BodyPart {
 
     public void open() {
         this.closed = false;
-        System.out.println(owner + " открыл " + getName());
+        System.out.println(getOwner() + " открыл " + getName());
     }
 
     public boolean areClosed() {
@@ -33,20 +33,7 @@ public class Eyes extends BodyPart {
 
     public void close() {
         this.closed = true;
-        System.out.println(owner + " открыл " + getName());
-    }
-
-    public void setOwner(Creature owner) {
-        this.owner = owner;
-    }
-
-    public Creature getOwner() {
-        return owner;
-    }
-
-    @Override
-    protected String getName() {
-        return this.name;
+        System.out.println(getOwner() + " открыл " + getName());
     }
 
     @Override
@@ -60,8 +47,8 @@ public class Eyes extends BodyPart {
     }
 
     public void expand() {
-        System.out.println(this + " " + owner + " расширились");
-        owner.setType(Characteristics.SCARED);
+        System.out.println(this + " " + getOwner() + " расширились");
+        getOwner().setType(Characteristics.SCARED);
     }
 
     @Override
@@ -70,7 +57,8 @@ public class Eyes extends BodyPart {
     }
 
     @Override
-    public String toString() {
-        return name;
+    public ItemType getType() {
+        return null;
     }
+
 }

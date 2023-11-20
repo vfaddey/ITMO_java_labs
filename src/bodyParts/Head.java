@@ -1,21 +1,27 @@
 package bodyParts;
 
 import aClasses.BodyPart;
+import aClasses.Creature;
+import enums.ItemType;
 
 public class Head extends BodyPart {
     private boolean isHeated;
-    public BodyPart eyes;
-    public BodyPart nose;
+    public Eyes eyes;
+    public Nose nose;
+    public Face face;
 
-    public Head(BodyPart eyes, BodyPart nose) {
-        super("голова");
-        this.eyes = eyes;
-        this.nose = nose;
+    public Head(String name, Creature owner) {
+        super(name, owner);
+        this.eyes = new Eyes("глаза", owner);
+        this.nose = new Nose("нос", owner);
+        this.face = new Face("лицо", owner);
     }
 
-    public Head(String name, Eyes eyes, boolean isHeated) {
-        super(name);
+    public Head(String name, Eyes eyes, Nose nose, Face face, Creature owner,  boolean isHeated) {
+        super(name, owner);
         this.eyes = eyes;
+        this.nose = nose;
+        this.face = face;
         this.isHeated = isHeated;
     }
 
@@ -36,6 +42,11 @@ public class Head extends BodyPart {
 
     @Override
     public String getState() {
+        return null;
+    }
+
+    @Override
+    public ItemType getType() {
         return null;
     }
 }

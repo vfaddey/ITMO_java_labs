@@ -2,25 +2,19 @@ package bodyParts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
+import aClasses.Item;
 import enums.Characteristics;
+import enums.ItemType;
 
 public class Bone extends BodyPart {
-
     private String name;
-    private Creature belongsTo;
     private boolean isHeated;
+    private ItemType type;
 
-    public Bone(String name) {
-        super(name);
+    public Bone(String name, Creature owner) {
+        super(name, owner);
     }
 
-    public void setOwner(Creature owner) {
-        this.belongsTo = owner;
-    }
-
-    public Creature getOwner() {
-        return belongsTo;
-    }
 
     public void tremble() {
         if (getOwner() != null) {
@@ -33,6 +27,7 @@ public class Bone extends BodyPart {
         else {
             System.out.println(this + " дрожат");
         }
+        this.type = ItemType.CREEPY;
     }
 
     public void move() {
@@ -46,6 +41,7 @@ public class Bone extends BodyPart {
         else {
             System.out.println(this + " шевелятся");
         }
+        this.type = ItemType.CREEPY;
     }
 
     public void crawl() {
@@ -59,6 +55,7 @@ public class Bone extends BodyPart {
         else {
             System.out.println(this + " ползают");
         }
+        this.type = ItemType.CREEPY;
     }
 
     @Override
@@ -79,5 +76,10 @@ public class Bone extends BodyPart {
     @Override
     public String getState() {
         return null;
+    }
+
+    @Override
+    public ItemType getType() {
+        return this.type;
     }
 }

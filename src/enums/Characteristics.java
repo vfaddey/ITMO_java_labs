@@ -15,6 +15,8 @@ public enum Characteristics {
     THIRSTY("хочет пить"),
     SLEEP("спит"),
     SCARED("напуган"),
+    ASTONISHED("ошоломлен"),
+    KNEELING("стоит на коленях"),
     DIRTY("грязный");
 
     private final String translation;

@@ -1,19 +1,36 @@
 package bodyParts;
 
 import aClasses.BodyPart;
+import aClasses.Creature;
+import enums.ItemType;
 
 public class Legs extends BodyPart {
     private boolean isHeated;
     private int quantity;
+    private boolean bended = false;
 
-    public Legs() {
-        super("ноги");
+    public Legs(String name, Creature owner) {
+        super(name, owner);
     }
 
-    public Legs(String name, int quantity, boolean isHeated) {
-        super(name);
+    public Legs(String name, Creature owner, int quantity, boolean isHeated) {
+        super(name, owner);
         this.quantity = quantity;
         this.isHeated = isHeated;
+    }
+
+    public void bend() {
+        System.out.println(this + " " + getOwner() + " согнулись");
+        this.bended = true;
+    }
+
+    public boolean areBended() {
+        return this.bended;
+    }
+
+    public void unbend() {
+        System.out.println(this + " " + getOwner() + " разогнулись");
+        this.bended = false;
     }
 
     @Override
@@ -33,6 +50,11 @@ public class Legs extends BodyPart {
 
     @Override
     public String getState() {
+        return null;
+    }
+
+    @Override
+    public ItemType getType() {
         return null;
     }
 }

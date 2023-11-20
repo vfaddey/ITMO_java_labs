@@ -15,14 +15,12 @@ import java.util.Arrays;
 public class Human extends Creature {
 
     private final ArrayList<Item> inventory = new ArrayList<>();
-    public Bone bones = new Bone("кости");
-    public Body body = new Body("тело");
-    public Eyes eyes = new Eyes("зеленые", true, 2);
-    public Nose nose = new Nose();
-    public Hair hair = new Hair("темные");
-    public Hands hands = new Hands(2, false);
-    public Legs legs = new Legs();
-    public Head head = new Head(eyes, nose);
+    public Bone bones = new Bone("кости", this);
+    public Body body = new Body("тело", this);
+    public Hair hair = new Hair("темные", this);
+    public Hands hands = new Hands("руки", 2, this, false);
+    public Legs legs = new Legs("ноги", this);
+    public Head head = new Head("голова", this);
 
     public Human(String name, int age, Location loc, Characteristics... characteristics) {
         super(name, age, loc, characteristics);
@@ -98,6 +96,9 @@ public class Human extends Creature {
 
     @Override
     protected void look(BodyPart bodyPart) {
+        if (bodyPart.getType() == ItemType.CREEPY) {
+            this.head.eyes.expand();
+        }
         lookOnBodyPart = bodyPart;
         lookOnCreature = null;
         lookOnItem = null;
@@ -202,16 +203,27 @@ public class Human extends Creature {
         person.look(bodyPart);
     }
 
+    public void fallOnKnees() {
+        this.legs.bend();
+        this.setType(Characteristics.KNEELING);
+    }
+
     @Override
     public void moveTo(Location place) {
-        getLocation().removeCreatures(this);
-        setLocation(place);
-        place.setCreatures(this);
-        if (characteristics.contains(Characteristics.DIRTY)) {
-            getLocation().setItems(new Dirt("грязь"));
-            System.out.println(name + " пришел на " + place + ", оставив за собой грязные следы");
+        if (this.hasType(Characteristics.KNEELING)) {
+            System.out.println(this + "не может идти, он" + Characteristics.KNEELING);
         }
-        else System.out.println(name + " пришел на " + place);
+        else {
+            getLocation().removeCreatures(this);
+            setLocation(place);
+            place.setCreatures(this);
+            if (characteristics.contains(Characteristics.DIRTY)) {
+                getLocation().setItems(new Dirt("грязь"));
+                System.out.println(name + " пришел на " + place + ", оставив за собой грязные следы");
+            }
+            else System.out.println(name + " пришел на " + place);
+        }
+
     }
 
     @Override
@@ -237,4 +249,13 @@ public class Human extends Creature {
         }
     }
 
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (this.getClass() == object.getClass() && this.name.equals(((Human) object).name) && this.head.getOwner() == ((Human) object).head.getOwner()) {
+            return true;
+        }
+        Human human = (Human) object;
+        return this.characteristics == human.characteristics;
+    }
 }

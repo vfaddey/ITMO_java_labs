@@ -2,6 +2,7 @@ package phenomenons;
 
 import aClasses.Creature;
 import aClasses.Phenomenon;
+import base.Human;
 import base.Location;
 
 import enums.Characteristics;
@@ -31,6 +32,11 @@ public class Fear extends Phenomenon implements Hitter {
     public void hit() {
         for (Creature creature : this.location.getCreatures()) {
             creature.setType(Characteristics.SCARED);
+            for (Creature person : this.location.getCreatures()) {
+                ((Human) person).bones.tremble();
+                ((Human) person).bones.crawl();
+                ((Human) person).bones.move();
+            }
         }
     }
 
