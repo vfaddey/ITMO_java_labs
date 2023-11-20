@@ -28,14 +28,14 @@ public class Fear extends Phenomenon implements Hitter {
     }
 
     @Override
-    public String toString() {
-        return this.name;
-    }
-
-    @Override
     public void hit() {
         for (Creature creature : this.location.getCreatures()) {
             creature.setType(Characteristics.SCARED);
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

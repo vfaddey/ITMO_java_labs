@@ -15,14 +15,14 @@ import java.util.Arrays;
 public class Human extends Creature {
 
     private final ArrayList<Item> inventory = new ArrayList<>();
-    public BodyPart bones = new Bone("кости");
-    public BodyPart body = new Body("тело");
+    public Bone bones = new Bone("кости");
+    public Body body = new Body("тело");
     public Eyes eyes = new Eyes("зеленые", true, 2);
-    public BodyPart nose = new Nose();
-    public BodyPart hair = new Hair("темные");
-    public BodyPart hands = new Hands(2, false);
-    public BodyPart legs = new Legs();
-    public BodyPart head = new Head(eyes, nose);
+    public Nose nose = new Nose();
+    public Hair hair = new Hair("темные");
+    public Hands hands = new Hands(2, false);
+    public Legs legs = new Legs();
+    public Head head = new Head(eyes, nose);
 
     public Human(String name, int age, Location loc, Characteristics... characteristics) {
         super(name, age, loc, characteristics);

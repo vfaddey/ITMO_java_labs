@@ -5,9 +5,6 @@ import interfaces.Hitter;
 public abstract class BodyPart implements Hitter {
     private String name;
     protected boolean isHeated;
-    public BodyPart() {
-        name = "конечность";
-    }
     public BodyPart(String name) {
         this.name = name;
     }
@@ -16,6 +13,7 @@ public abstract class BodyPart implements Hitter {
         return this.name;
     }
 
+    @Override
     public String toString() {
         return name;
     }

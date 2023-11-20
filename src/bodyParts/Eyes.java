@@ -15,7 +15,7 @@ public class Eyes extends BodyPart {
         super(name);
     }
     public Eyes(String color, boolean closed, int quantity) {
-        this.name = "глаза";
+        super("глаза");
         this.color = color;
         this.closed = closed;
         this.quantity = quantity;
@@ -67,5 +67,10 @@ public class Eyes extends BodyPart {
     @Override
     public String getState() {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

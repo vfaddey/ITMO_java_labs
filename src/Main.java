@@ -39,7 +39,7 @@ public class Main {
         group.moveTo(lawn);
         fear.interact();
         paskou.lough();
-        //paskou.eyes.expand();
+        paskou.eyes.expand();
 
         luis.show(paskou, luis.bones);
 

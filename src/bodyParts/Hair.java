@@ -9,6 +9,7 @@ public class Hair extends BodyPart {
         super("волосы");
     }
     public Hair(String color) {
+        super("волосы");
         this.color = color;
     }
     @Override

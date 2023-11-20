@@ -2,6 +2,7 @@ package aClasses;
 
 import enums.Characteristics;
 import base.Location;
+import interfaces.Hitter;
 import interfaces.Interactable;
 import interfaces.Position;
 

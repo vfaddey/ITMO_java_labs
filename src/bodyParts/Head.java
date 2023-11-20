@@ -8,7 +8,7 @@ public class Head extends BodyPart {
     public BodyPart nose;
 
     public Head(BodyPart eyes, BodyPart nose) {
-        super("глаза");
+        super("голова");
         this.eyes = eyes;
         this.nose = nose;
     }

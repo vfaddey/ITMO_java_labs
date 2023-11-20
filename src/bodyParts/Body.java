@@ -24,4 +24,5 @@ public class Body extends BodyPart {
     public String getState() {
         return null;
     }
+
 }
