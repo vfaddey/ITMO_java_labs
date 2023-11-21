@@ -6,7 +6,7 @@ import enums.ItemType;
 
 public class Hair extends BodyPart {
     private String color;
-    private final boolean isHeated = false;
+    private boolean isHeated = false;
 
     public Hair(String color, Creature owner) {
         super("волосы", owner);
@@ -24,7 +24,8 @@ public class Hair extends BodyPart {
 
     @Override
     public void hit() {
-
+        this.isHeated = true;
+        System.out.println(this + " выдраны");
     }
 
     @Override

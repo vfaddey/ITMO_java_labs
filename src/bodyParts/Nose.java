@@ -23,7 +23,8 @@ public class Nose extends BodyPart {
 
     @Override
     public void hit() {
-
+        isHeated = true;
+        System.out.println(this + " сломан");
     }
 
     @Override

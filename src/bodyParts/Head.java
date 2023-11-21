@@ -37,7 +37,11 @@ public class Head extends BodyPart {
 
     @Override
     public void hit() {
-
+        isHeated = true;
+        this.eyes.hit();
+        this.face.hit();
+        this.nose.hit();
+        System.out.println(this + " сломана");
     }
 
     @Override

@@ -42,7 +42,8 @@ public class Eyes extends BodyPart {
 
     @Override
     public void hit() {
-
+        isHeated = true;
+        System.out.println(this + " повреждены");
     }
 
     public void expand() {

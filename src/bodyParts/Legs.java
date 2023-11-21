@@ -45,7 +45,8 @@ public class Legs extends BodyPart {
 
     @Override
     public void hit() {
-
+        isHeated = true;
+        System.out.println(this + " сломаны");
     }
 
     @Override

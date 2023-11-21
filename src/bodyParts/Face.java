@@ -33,6 +33,7 @@ public class Face extends BodyPart {
 
     @Override
     public void hit() {
-
+        isHeated = true;
+        System.out.println(this + " истекает кровью");
     }
 }
