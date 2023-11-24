@@ -89,9 +89,9 @@ public abstract class Creature implements Interactable, Position {
 
     protected abstract void voice(String str);
     protected abstract boolean hears(Creature creature);
-    protected abstract void look(Creature creature);
-    protected abstract void look(Item item);
-    protected abstract void look(BodyPart bodyPart);
+    public abstract void look(Creature creature);
+    public abstract void look(Item item);
+    public abstract void look(BodyPart bodyPart);
     protected abstract void sleep();
     protected abstract void wakeUp();
     protected abstract boolean isSleeping();

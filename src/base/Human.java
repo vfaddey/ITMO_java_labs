@@ -3,13 +3,14 @@ package base;
 import aClasses.BodyPart;
 import aClasses.Creature;
 import aClasses.Item;
-import bodyParts.*;
+import body.parts.*;
 import enums.Characteristics;
 import enums.ItemType;
 import items.Dirt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class Human extends Creature {
@@ -47,7 +48,12 @@ public class Human extends Creature {
         else {
             System.out.println(this + " закричал");
             for (Creature creature : getLocation().getCreatures()) {
-                if (!creature.hasType(Characteristics.SCARED)) creature.setType(Characteristics.SCARED);
+                if (!creature.hasType(Characteristics.SCARED)) {
+                    creature.setType(Characteristics.SCARED);
+                    if (creature instanceof Human) {
+                        creature.look(this);
+                    }
+                }
             }
         }
     }
@@ -75,7 +81,7 @@ public class Human extends Creature {
     }
 
     @Override
-    protected void look(Creature creature) {
+    public void look(Creature creature) {
         lookOnCreature = creature;
         lookOnItem = null;
         lookOnBodyPart = null;
@@ -83,7 +89,7 @@ public class Human extends Creature {
     }
 
     @Override
-    protected void look(Item item) {
+    public void look(Item item) {
         lookOnItem = item;
         lookOnBodyPart = null;
         lookOnCreature = null;
@@ -91,7 +97,7 @@ public class Human extends Creature {
     }
 
     @Override
-    protected void look(BodyPart bodyPart) {
+    public void look(BodyPart bodyPart) {
         if (bodyPart.getType() == ItemType.CREEPY) {
             this.head.eyes.expand();
         }
@@ -177,7 +183,10 @@ public class Human extends Creature {
     }
 
     public boolean has(Item item) {
-        return inventory.contains(item);
+        for (Item ownItem : inventory) {
+            if (ownItem.equals(item)) return true;
+        }
+        return false;
     }
 
     public void hit(BodyPart bodyPart) {
@@ -195,8 +204,10 @@ public class Human extends Creature {
     }
 
     public void show(Human person, BodyPart bodyPart) {
-        System.out.println(this + " указал " + person + " на " + bodyPart);
-        person.look(bodyPart);
+        if (person != this) {
+            System.out.println(this + " указал " + person + " на " + bodyPart);
+            person.look(bodyPart);
+        }
     }
 
     public void fallOnKnees() {
@@ -245,13 +256,16 @@ public class Human extends Creature {
         }
     }
 
-
+    @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (this.getClass() == object.getClass() && this.name.equals(((Human) object).name) && this.head.getOwner() == ((Human) object).head.getOwner()) {
-            return true;
-        }
-        Human human = (Human) object;
-        return this.characteristics == human.characteristics;
+        if (!(object instanceof Human)) return false;
+        if (this.hashCode() != object.hashCode()) return false;
+        Human person = (Human) object;
+        return person.name.equals(this.name) && person.age == this.age;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, getLocation(), inventory);
     }
 }

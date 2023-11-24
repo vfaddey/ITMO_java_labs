@@ -25,8 +25,13 @@ public abstract class Item {
         this.types.addAll(Arrays.asList(types));
     }
 
-    public Location getLocation(Location location) {
+    public Location getLocation() {
         return this.location;
+    }
+
+    public void setLocation(Location location) {
+        location.placeItem(this);
+        this.location = location;
     }
 
     public boolean hasType(ItemType type) {
@@ -40,10 +45,17 @@ public abstract class Item {
         return name;
     }
 
+
     @Override
-    public int hashCode() {
-        return Objects.hash(name);
+    public boolean equals(Object object) {
+        if (!(object instanceof Item)) return false;
+        if (object.hashCode() != this.hashCode()) return false;
+        Item otherItem = (Item) object;
+        return otherItem.name.equals(this.name) && otherItem.location.equals(this.location);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, location, types);
+    }
 }

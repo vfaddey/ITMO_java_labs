@@ -1,8 +1,7 @@
-package bodyParts;
+package body.parts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
-import aClasses.Item;
 import base.Human;
 import enums.Characteristics;
 import enums.ItemType;

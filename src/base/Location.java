@@ -63,5 +63,8 @@ public class Location {
         return name;
     }
 
-
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }

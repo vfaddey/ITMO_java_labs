@@ -1,10 +1,8 @@
-package bodyParts;
+package body.parts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
 import enums.ItemType;
-
-import javax.script.ScriptEngine;
 
 public class Nose extends BodyPart {
     public Nose(String name, Creature owner) {

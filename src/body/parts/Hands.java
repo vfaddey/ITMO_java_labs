@@ -1,15 +1,27 @@
-package bodyParts;
+package body.parts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
 import base.Human;
 import enums.ItemType;
 
-public class Body extends BodyPart {
+public class Hands extends BodyPart {
     private boolean isHeated;
+    private int quantity;
 
-    public Body(String name, Creature owner) {
+    public Hands(String name, Creature owner) {
+        super("руки", owner);
+    }
+
+    public Hands(String name, int quantity, Creature owner,  boolean isHeated) {
         super(name, owner);
+        this.quantity = quantity;
+        this.isHeated = isHeated;
+    }
+
+    @Override
+    protected String getName() {
+        return null;
     }
 
     @Override
@@ -19,8 +31,8 @@ public class Body extends BodyPart {
 
     @Override
     public void hit() {
-        this.isHeated = true;
-        System.out.println(getName() + " сломано");
+        isHeated = true;
+        System.out.println(this + " сломаны");
         if (getOwner() instanceof Human) {
             ((Human)getOwner()).shout();
         }
@@ -35,5 +47,4 @@ public class Body extends BodyPart {
     public ItemType getType() {
         return null;
     }
-
 }

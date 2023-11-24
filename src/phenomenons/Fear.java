@@ -9,8 +9,6 @@ import enums.Characteristics;
 import interfaces.Hitter;
 
 public class Fear extends Phenomenon implements Hitter {
-    private Location location;
-    private String name = "ужас";
 
     public Fear(String name, Location location) {
         super(name, location);
@@ -24,18 +22,13 @@ public class Fear extends Phenomenon implements Hitter {
 
     @Override
     public void hit() {
-        for (Creature creature : this.location.getCreatures()) {
+        for (Creature creature : getLocation().getCreatures()) {
             creature.setType(Characteristics.SCARED);
-            for (Creature person : this.location.getCreatures()) {
+            for (Creature person : getLocation().getCreatures()) {
                 ((Human) person).bones.tremble();
                 ((Human) person).bones.crawl();
                 ((Human) person).bones.move();
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
     }
 }

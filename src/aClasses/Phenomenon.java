@@ -12,5 +12,16 @@ public abstract class Phenomenon {
         location.setPhenomenon(this);
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
     public abstract void interact();
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+
 }

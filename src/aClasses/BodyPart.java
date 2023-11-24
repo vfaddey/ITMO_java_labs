@@ -32,6 +32,7 @@ public abstract class BodyPart implements Hitter {
 
     @Override
     public String toString() {
+        if (owner == null) return "";
         return name;
     }
 

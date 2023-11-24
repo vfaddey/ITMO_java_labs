@@ -1,4 +1,4 @@
-package bodyParts;
+package body.parts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
