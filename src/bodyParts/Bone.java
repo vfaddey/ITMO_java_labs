@@ -3,6 +3,7 @@ package bodyParts;
 import aClasses.BodyPart;
 import aClasses.Creature;
 import aClasses.Item;
+import base.Human;
 import enums.Characteristics;
 import enums.ItemType;
 
@@ -22,10 +23,10 @@ public class Bone extends BodyPart {
                 if (!other.hasType(Characteristics.SCARED))
                     other.setType(Characteristics.SCARED);
             }
-            System.out.println(this + " дрожат");
+            System.out.println(this + " " + getOwner() + " дрожат");
         }
         else {
-            System.out.println(this + " дрожат");
+            System.out.println(this + " " + getOwner() + " дрожат");
         }
         this.type = ItemType.CREEPY;
     }
@@ -36,10 +37,10 @@ public class Bone extends BodyPart {
                 if (!other.hasType(Characteristics.SCARED))
                     other.setType(Characteristics.SCARED);
             }
-            System.out.println(this + " шевелятся");
+            System.out.println(this + " " + getOwner() + " шевелятся");
         }
         else {
-            System.out.println(this + " шевелятся");
+            System.out.println(this + " " + getOwner() + " шевелятся");
         }
         this.type = ItemType.CREEPY;
     }
@@ -50,10 +51,10 @@ public class Bone extends BodyPart {
                 if (!other.hasType(Characteristics.SCARED))
                     other.setType(Characteristics.SCARED);
             }
-            System.out.println(this + " ползают");
+            System.out.println(this + " " + getOwner() + " ползают");
         }
         else {
-            System.out.println(this + " ползают");
+            System.out.println(this + " " + getOwner() + " ползают");
         }
         this.type = ItemType.CREEPY;
     }
@@ -72,6 +73,9 @@ public class Bone extends BodyPart {
     public void hit() {
         isHeated = true;
         System.out.println(this + " сломаны");
+        if (getOwner() instanceof Human) {
+            ((Human)getOwner()).shout();
+        }
     }
 
     @Override

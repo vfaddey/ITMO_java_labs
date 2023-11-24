@@ -31,10 +31,6 @@ public class Human extends Creature {
         super(name, age, characteristics);
     }
 
-    private void setBodyParts(BodyPart... bodyParts) {
-
-    }
-
     public void lough() {
         if (characteristics.contains(Characteristics.HAPPY)) {
             System.out.println(name + " громко посмеялся");
@@ -47,12 +43,12 @@ public class Human extends Creature {
     public void shout() {
         if (Math.random() < .4d) {
             System.out.println(this + " попытался закричать, но не смог");
-            for (Creature creature : getLocation().getCreatures()) {
-                creature.setType(Characteristics.SCARED);
-            }
         }
         else {
             System.out.println(this + " закричал");
+            for (Creature creature : getLocation().getCreatures()) {
+                if (!creature.hasType(Characteristics.SCARED)) creature.setType(Characteristics.SCARED);
+            }
         }
     }
 

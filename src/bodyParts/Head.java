@@ -2,6 +2,7 @@ package bodyParts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
+import base.Human;
 import enums.ItemType;
 
 public class Head extends BodyPart {
@@ -42,6 +43,9 @@ public class Head extends BodyPart {
         this.face.hit();
         this.nose.hit();
         System.out.println(this + " сломана");
+        if (getOwner() instanceof Human) {
+            ((Human)getOwner()).shout();
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package bodyParts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
+import base.Human;
 import enums.Characteristics;
 import enums.ItemType;
 
@@ -44,6 +45,9 @@ public class Eyes extends BodyPart {
     public void hit() {
         isHeated = true;
         System.out.println(this + " повреждены");
+        if (getOwner() instanceof Human) {
+            ((Human)getOwner()).shout();
+        }
     }
 
     public void expand() {

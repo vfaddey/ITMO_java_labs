@@ -12,17 +12,11 @@ public class Fear extends Phenomenon implements Hitter {
     private Location location;
     private String name = "ужас";
 
-    public Fear(Location location) {
-        this.location = location;
-        location.setPhenomenon(this);
-    }
-
     public Fear(String name, Location location) {
-        this.name = name;
-        this.location = location;
-        location.setPhenomenon(this);
+        super(name, location);
     }
 
+    @Override
     public void interact() {
         System.out.println(this + " нарастал");
         hit();

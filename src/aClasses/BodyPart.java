@@ -3,6 +3,8 @@ package aClasses;
 import enums.ItemType;
 import interfaces.Hitter;
 
+import java.util.Objects;
+
 public abstract class BodyPart implements Hitter {
     private String name;
     protected boolean isHeated;
@@ -31,6 +33,11 @@ public abstract class BodyPart implements Hitter {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
     protected abstract boolean isHeated();
     public abstract String getState();

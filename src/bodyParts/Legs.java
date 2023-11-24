@@ -2,6 +2,7 @@ package bodyParts;
 
 import aClasses.BodyPart;
 import aClasses.Creature;
+import base.Human;
 import enums.ItemType;
 
 public class Legs extends BodyPart {
@@ -47,6 +48,9 @@ public class Legs extends BodyPart {
     public void hit() {
         isHeated = true;
         System.out.println(this + " сломаны");
+        if (getOwner() instanceof Human) {
+            ((Human)getOwner()).shout();
+        }
     }
 
     @Override

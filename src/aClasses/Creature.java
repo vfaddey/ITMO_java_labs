@@ -9,6 +9,7 @@ import interfaces.Position;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public abstract class Creature implements Interactable, Position {
     protected String name;
@@ -79,6 +80,11 @@ public abstract class Creature implements Interactable, Position {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     protected abstract void voice(String str);
