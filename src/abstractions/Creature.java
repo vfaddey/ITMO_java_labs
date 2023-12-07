@@ -1,12 +1,10 @@
-package aClasses;
+package abstractions;
 
 import enums.Characteristics;
 import base.Location;
-import interfaces.Hitter;
 import interfaces.Interactable;
 import interfaces.Position;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -43,7 +41,7 @@ public abstract class Creature implements Interactable, Position {
         return location;
     }
 
-    public void setType(Characteristics... characteristics) {
+    public void addTypes(Characteristics... characteristics) {
         this.characteristics.addAll(Arrays.asList(characteristics));
         if (characteristics.length == 1) {
             System.out.println(this + " " + characteristics[0]);
@@ -55,6 +53,10 @@ public abstract class Creature implements Interactable, Position {
             }
             System.out.println();
         }
+    }
+
+    public void setTypes(Characteristics... characteristics) {
+        this.characteristics = (ArrayList<Characteristics>) Arrays.asList(characteristics);
     }
 
     public boolean hasType(Characteristics characteristic) {

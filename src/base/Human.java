@@ -1,8 +1,9 @@
 package base;
 
-import aClasses.BodyPart;
-import aClasses.Creature;
-import aClasses.Item;
+import abstractions.BodyPart;
+import abstractions.Creature;
+import abstractions.Item;
+import body.Body;
 import body.parts.*;
 import enums.Characteristics;
 import enums.ItemType;
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 public class Human extends Creature {
 
-    private final ArrayList<Item> inventory = new ArrayList<>();
+    private ArrayList<Item> inventory = new ArrayList<>();
     public Bone bones = new Bone("кости", this);
     public Body body = new Body("тело", this);
     public Hair hair = new Hair("темные", this);
@@ -49,7 +50,7 @@ public class Human extends Creature {
             System.out.println(this + " закричал");
             for (Creature creature : getLocation().getCreatures()) {
                 if (!creature.hasType(Characteristics.SCARED)) {
-                    creature.setType(Characteristics.SCARED);
+                    creature.addTypes(Characteristics.SCARED);
                     if (creature instanceof Human) {
                         creature.look(this);
                     }
@@ -212,7 +213,7 @@ public class Human extends Creature {
 
     public void fallOnKnees() {
         this.legs.bend();
-        this.setType(Characteristics.KNEELING);
+        this.addTypes(Characteristics.KNEELING);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package body.parts;
 
-import aClasses.BodyPart;
-import aClasses.Creature;
+import abstractions.BodyPart;
+import abstractions.Creature;
 import base.Human;
 import enums.Characteristics;
 import enums.ItemType;
@@ -20,7 +20,7 @@ public class Bone extends BodyPart {
         if (getOwner() != null) {
             for (Creature other : getOwner().getLocation().getCreatures()) {
                 if (!other.hasType(Characteristics.SCARED))
-                    other.setType(Characteristics.SCARED);
+                    other.addTypes(Characteristics.SCARED);
             }
             System.out.println(this + " " + getOwner() + " дрожат");
         }
@@ -34,7 +34,7 @@ public class Bone extends BodyPart {
         if (getOwner() != null) {
             for (Creature other : getOwner().getLocation().getCreatures()) {
                 if (!other.hasType(Characteristics.SCARED))
-                    other.setType(Characteristics.SCARED);
+                    other.addTypes(Characteristics.SCARED);
             }
             System.out.println(this + " " + getOwner() + " шевелятся");
         }
@@ -48,7 +48,7 @@ public class Bone extends BodyPart {
         if (getOwner() != null) {
             for (Creature other : getOwner().getLocation().getCreatures()) {
                 if (!other.hasType(Characteristics.SCARED))
-                    other.setType(Characteristics.SCARED);
+                    other.addTypes(Characteristics.SCARED);
             }
             System.out.println(this + " " + getOwner() + " ползают");
         }

@@ -1,6 +1,6 @@
 package interfaces;
 
-import aClasses.Item;
+import abstractions.Item;
 
 public interface Interactable {
     void take(Item object);

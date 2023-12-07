@@ -1,7 +1,7 @@
 package body.parts;
 
-import aClasses.BodyPart;
-import aClasses.Creature;
+import abstractions.BodyPart;
+import abstractions.Creature;
 import enums.ItemType;
 
 public class Nose extends BodyPart {

@@ -1,7 +1,7 @@
 package body.parts;
 
-import aClasses.BodyPart;
-import aClasses.Creature;
+import abstractions.BodyPart;
+import abstractions.Creature;
 import base.Human;
 import enums.Characteristics;
 import enums.ItemType;
@@ -52,7 +52,7 @@ public class Eyes extends BodyPart {
 
     public void expand() {
         System.out.println(this + " " + getOwner() + " расширились");
-        getOwner().setType(Characteristics.SCARED);
+        getOwner().addTypes(Characteristics.SCARED);
     }
 
     @Override

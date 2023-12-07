@@ -1,7 +1,7 @@
 package items;
 
-import aClasses.Creature;
-import aClasses.Item;
+import abstractions.Creature;
+import abstractions.Item;
 import enums.Characteristics;
 import enums.ItemType;
 
@@ -17,7 +17,7 @@ public class Dirt extends Item {
     @Override
     public void interact(Creature creature) {
         System.out.println(this + " просачивается в конечностях " + creature);
-        creature.setType(Characteristics.DIRTY);
+        creature.addTypes(Characteristics.DIRTY);
     }
 
     @Override

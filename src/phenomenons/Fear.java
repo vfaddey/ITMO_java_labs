@@ -1,7 +1,7 @@
 package phenomenons;
 
-import aClasses.Creature;
-import aClasses.Phenomenon;
+import abstractions.Creature;
+import abstractions.Phenomenon;
 import base.Human;
 import base.Location;
 
@@ -23,11 +23,13 @@ public class Fear extends Phenomenon implements Hitter {
     @Override
     public void hit() {
         for (Creature creature : getLocation().getCreatures()) {
-            creature.setType(Characteristics.SCARED);
+            creature.addTypes(Characteristics.SCARED);
             for (Creature person : getLocation().getCreatures()) {
-                ((Human) person).bones.tremble();
-                ((Human) person).bones.crawl();
-                ((Human) person).bones.move();
+                if (person instanceof Human) {
+                    ((Human) person).bones.tremble();
+                    ((Human) person).bones.crawl();
+                    ((Human) person).bones.move();
+                }
             }
         }
     }

@@ -1,7 +1,7 @@
 package items;
 
-import aClasses.Creature;
-import aClasses.Item;
+import abstractions.Creature;
+import abstractions.Item;
 
 public class PileOfBones extends Item {
     public PileOfBones(String name) {

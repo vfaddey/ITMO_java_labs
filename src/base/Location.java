@@ -1,8 +1,8 @@
 package base;
 
-import aClasses.Creature;
-import aClasses.Item;
-import aClasses.Phenomenon;
+import abstractions.Creature;
+import abstractions.Item;
+import abstractions.Phenomenon;
 
 import java.util.ArrayList;
 import java.util.Arrays;

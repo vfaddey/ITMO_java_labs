@@ -1,4 +1,4 @@
-package aClasses;
+package abstractions;
 
 import enums.ItemType;
 import interfaces.Hitter;
@@ -17,10 +17,6 @@ public abstract class BodyPart implements Hitter {
 
     protected String getName() {
         return this.name;
-    }
-
-    public void setOwner(Creature creature) {
-        this.owner = creature;
     }
     public boolean belongsTo(Creature creature) {
         return this.owner.equals(creature);

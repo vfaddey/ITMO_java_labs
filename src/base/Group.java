@@ -1,11 +1,10 @@
 package base;
 
-import aClasses.Creature;
+import abstractions.Creature;
 import interfaces.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Group implements Position {
     private ArrayList<Human> people = new ArrayList<>();
@@ -45,8 +44,7 @@ public class Group implements Position {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Group)) return false;
-        Group otherGroup = (Group) object;
+        if (!(object instanceof Group otherGroup)) return false;
         if (this.people.size() != otherGroup.people.size()) return false;
         int sumThis = 0, sumOther = 0;
         for (int i = 0; i < people.size(); i++) {

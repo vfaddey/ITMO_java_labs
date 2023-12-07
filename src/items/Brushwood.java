@@ -1,7 +1,7 @@
 package items;
 
-import aClasses.Creature;
-import aClasses.Item;
+import abstractions.Creature;
+import abstractions.Item;
 import base.Location;
 import interfaces.Transformer;
 

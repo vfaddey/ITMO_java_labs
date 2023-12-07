@@ -1,7 +1,7 @@
 package body.parts;
 
-import aClasses.BodyPart;
-import aClasses.Creature;
+import abstractions.BodyPart;
+import abstractions.Creature;
 import base.Human;
 import enums.ItemType;
 
