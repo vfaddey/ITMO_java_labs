@@ -7,6 +7,8 @@ import body.Body;
 import body.parts.*;
 import enums.Characteristics;
 import enums.ItemType;
+import interfaces.Eater;
+import interfaces.Interactable;
 import items.Dirt;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class Human extends Creature {
+public class Human extends Creature implements Eater, Interactable {
 
     private ArrayList<Item> inventory = new ArrayList<>();
     public Bone bones = new Bone("кости", this);

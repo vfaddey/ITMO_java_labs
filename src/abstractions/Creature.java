@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public abstract class Creature implements Interactable, Position {
+public abstract class Creature implements Position {
     protected String name;
     protected int age;
     private Location location;
