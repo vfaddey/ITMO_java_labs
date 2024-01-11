@@ -21,7 +21,7 @@ public abstract class Item {
 
     protected abstract boolean isInteractable();
 
-    protected void setType(ItemType... types) {
+    public void setType(ItemType... types) {
         this.types.addAll(Arrays.asList(types));
     }
 
@@ -38,7 +38,7 @@ public abstract class Item {
         return this.types.contains(type);
     }
 
-    protected abstract void interact(Creature creature);
+    public abstract void interact(Creature creature);
 
     @Override
     public String toString() {

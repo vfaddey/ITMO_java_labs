@@ -2,6 +2,8 @@ package abstractions;
 
 import enums.Characteristics;
 import base.Location;
+import exceptions.InvalidAgeException;
+import exceptions.LocationException;
 import interfaces.Interactable;
 import interfaces.Position;
 
@@ -19,22 +21,43 @@ public abstract class Creature implements Position {
     protected BodyPart lookOnBodyPart;
 
 
-    public Creature(String name, int age, Location loc, Characteristics... characteristics) {
+    public Creature(String name, int age, Location loc, Characteristics... characteristics) throws InvalidAgeException {
         this.name = name;
-        this.age = age;
+        try {
+            setAge(age);
+        }
+        catch (InvalidAgeException e) {
+            System.out.println(e);
+            setAge(18);
+        }
         this.location = loc;
         this.characteristics.addAll(Arrays.asList(characteristics));
     }
 
-    public Creature(String name, int age, Characteristics... characteristics) {
+    public Creature(String name, int age, Characteristics... characteristics) throws InvalidAgeException {
         this.name = name;
-        this.age = age;
+        try {
+            setAge(age);
+        }
+        catch (InvalidAgeException e) {
+            System.out.println(e);
+            setAge(18);
+        }
         this.characteristics.addAll(Arrays.asList(characteristics));
     }
 
     public void setLocation(Location loc) {
         this.location = loc;
         loc.setCreatures(this);
+    }
+
+    private void setAge(int age) throws InvalidAgeException {
+        if (age < 0) {
+            throw new InvalidAgeException("Возраст не может быть меньше нуля");
+        }
+        else {
+            this.age = age;
+        }
     }
 
     public Location getLocation() {

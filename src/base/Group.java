@@ -16,6 +16,8 @@ public class Group implements Position {
     @Override
     public void moveTo(Location place) {
         for (Human person: people) {
+            if (person.getLocation() != null)
+                person.getLocation().removeCreatures(person);
             person.setLocation(place);
         }
         System.out.println(this + " пришли на " + place);

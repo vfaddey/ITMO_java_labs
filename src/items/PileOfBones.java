@@ -14,7 +14,7 @@ public class PileOfBones extends Item {
     }
 
     @Override
-    protected void interact(Creature creature) {
+    public void interact(Creature creature) {
 
     }
 }

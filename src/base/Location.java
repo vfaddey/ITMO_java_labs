@@ -54,6 +54,10 @@ public class Location {
         return this.items.toArray(items);
     }
 
+    public boolean containsItem(Item item) {
+        return this.items.contains(item);
+    }
+
     public void setPhenomenon(Phenomenon... phenomenon) {
         this.phenomenons.addAll(Arrays.asList(phenomenon));
     }
