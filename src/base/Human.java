@@ -7,10 +7,15 @@ import body.Body;
 import body.parts.*;
 import enums.Characteristics;
 import enums.ItemType;
+import enums.Language;
+import exceptions.InvalidAgeException;
+import exceptions.LocationException;
 import interfaces.Eater;
 import interfaces.Interactable;
 import items.Dirt;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -19,21 +24,29 @@ import java.util.Objects;
 public class Human extends Creature implements Eater, Interactable {
 
     private ArrayList<Item> inventory = new ArrayList<>();
-    public Bone bones = new Bone("кости", this);
+    private ArrayList<Language> languages = new ArrayList<>();
+    public Body.Bone bones = new Body.Bone("кости", this);
     public Body body = new Body("тело", this);
-    public Hair hair = new Hair("темные", this);
-    public Hands hands = new Hands("руки", 2, this, false);
-    public Legs legs = new Legs("ноги", this);
     public Head head = new Head("голова", this);
 
-    public Human(String name, int age, Location loc, Characteristics... characteristics) {
+    public Human(String name, int age, Location loc, Characteristics... characteristics) throws InvalidAgeException {
         super(name, age, loc, characteristics);
         loc.setCreatures(this);
     }
 
-    public Human(String name, int age, Characteristics... characteristics) {
+    public Human(String name, int age, Characteristics... characteristics) throws InvalidAgeException {
         super(name, age, characteristics);
     }
+
+
+    public void setLanguages(Language... languages) {
+        this.languages.addAll(Arrays.asList(languages));
+    }
+
+    public boolean knowsLanguage(Language language) {
+        return this.languages.contains(language);
+    }
+
 
     public void lough() {
         if (characteristics.contains(Characteristics.HAPPY)) {
@@ -74,6 +87,29 @@ public class Human extends Creature implements Eater, Interactable {
         else {
             System.out.println(this + " сказал " + human + "у: " + phrase);
             System.out.println("Но " + human + " его не услышал");
+        }
+    }
+
+    public void sayToOnLanguage(String phrase, Human human, Language language) {
+        if (human.knowsLanguage(language)) {
+            if (human.hears(this)) {
+                System.out.println(this + " сказал на " + language + " языке " + human + "у: " + phrase);
+                System.out.println(human + " его услышал");
+            }
+            else {
+                System.out.println(this + " сказал на " + language + " языке " + human + "у: " + phrase);
+                System.out.println("Но " + human + " его не услышал");
+            }
+        }
+        else if (human.hears(this)) {
+            if (Math.random() < 0.3d) {
+                System.out.println(this + " сказал на " + language + " языке " + human + "у: " + phrase);
+                System.out.println(human + "с трудом понял, что сказал" + this);
+            }
+        }
+        else {
+            System.out.println(this + " сказал на " + language + " языке " + human + "у: " + phrase);
+            System.out.println(human + "не понимал этого языка");
         }
     }
 
@@ -138,6 +174,19 @@ public class Human extends Creature implements Eater, Interactable {
 
     }
 
+    public void touch(Item item) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        System.out.println(this + " задел " + item);
+        if (Math.random() < 0.3d) {
+            try{
+                Method interactMethod = item.getClass().getMethod("interact", Creature.class);
+                interactMethod.invoke(item, this);
+            } catch (NoSuchMethodException | SecurityException | InvocationTargetException | IllegalAccessException ignored) {
+
+            }
+
+        }
+    }
+
     @Override
     public void put(Item item) {
         if (this.has(item)) {
@@ -196,14 +245,19 @@ public class Human extends Creature implements Eater, Interactable {
         bodyPart.hit();
     }
 
-    public void heatSmbBodyPart(Creature creature, BodyPart bodyPart) {
+    public void hitSmbBodyPart(Creature creature, BodyPart bodyPart) {
         bodyPart.hit();
         System.out.println(this + " повредил " + bodyPart + ", которая принадлежит" + creature);
     }
 
-    public void show(Human person, Item item) {
-        System.out.println(this + " указал " + person + " на " + item);
-        person.look(item);
+    public void show(Human person, Item item) throws LocationException {
+        if (getLocation().containsItem(item)) {
+            System.out.println(this + " указал " + person + " на " + item);
+            person.look(item);
+        }
+        else {
+            throw new LocationException("В данной локации нет " + item + ", на него нельзя указать");
+        }
     }
 
     public void show(Human person, BodyPart bodyPart) {
@@ -214,7 +268,7 @@ public class Human extends Creature implements Eater, Interactable {
     }
 
     public void fallOnKnees() {
-        this.legs.bend();
+        this.body.legs.bend();
         this.addTypes(Characteristics.KNEELING);
     }
 
@@ -271,4 +325,5 @@ public class Human extends Creature implements Eater, Interactable {
     public int hashCode() {
         return Objects.hash(name, age, getLocation(), inventory);
     }
+
 }

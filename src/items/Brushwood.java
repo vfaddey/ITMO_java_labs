@@ -19,7 +19,7 @@ public class Brushwood extends Item implements Transformer {
     }
 
     @Override
-    protected void interact(Creature creature) {
+    public void interact(Creature creature) {
 
     }
 
