@@ -12,11 +12,8 @@ public enum Characteristics {
     HAPPY("счастливый"),
     SAD("грустный"),
     HUNGRY("голодный"),
-    THIRSTY("хочет пить"),
-    SLEEP("спит"),
     SCARED("напуган"),
     ASTONISHED("ошоломлен"),
-    KNEELING("стоит на коленях"),
     DIRTY("грязный");
 
     private final String translation;

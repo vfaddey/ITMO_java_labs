@@ -9,8 +9,9 @@ import enums.Characteristics;
 import enums.ItemType;
 
 public class Body extends BodyPart {
-    public Hands hands = new Hands("руки", 2, getOwner(), false);
-    public Legs legs = new Legs("ноги", getOwner());
+
+    private Hands hands = new Hands("руки", 2, getOwner(), false);
+    private Legs legs = new Legs("ноги", getOwner());
     private boolean isHeated;
 
     public Body(String name, Creature owner) {
@@ -29,6 +30,14 @@ public class Body extends BodyPart {
         if (getOwner() instanceof Human) {
             ((Human) getOwner()).shout();
         }
+    }
+
+    public Hands getHands() {
+        return hands;
+    }
+
+    public Legs getLegs() {
+        return legs;
     }
 
     @Override

@@ -6,6 +6,7 @@ import abstractions.Item;
 import body.Body;
 import body.parts.*;
 import enums.Characteristics;
+import enums.Conditions;
 import enums.ItemType;
 import enums.Language;
 import exceptions.InvalidAgeException;
@@ -24,10 +25,11 @@ import java.util.Objects;
 public class Human extends Creature implements Eater, Interactable {
 
     private ArrayList<Item> inventory = new ArrayList<>();
+    private ArrayList<Conditions> conditions = new ArrayList<>();
     private ArrayList<Language> languages = new ArrayList<>();
-    public Body.Bone bones = new Body.Bone("кости", this);
-    public Body body = new Body("тело", this);
-    public Head head = new Head("голова", this);
+    private Body.Bone bones = new Body.Bone("кости", this);
+    private Body body = new Body("тело", this);
+    private Head head = new Head("голова", this);
 
     public Human(String name, int age, Location loc, Characteristics... characteristics) throws InvalidAgeException {
         super(name, age, loc, characteristics);
@@ -38,6 +40,24 @@ public class Human extends Creature implements Eater, Interactable {
         super(name, age, characteristics);
     }
 
+    public ArrayList<Conditions> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(Conditions... conditions) {
+        this.conditions.addAll(Arrays.asList(conditions));
+    }
+    public Head getHead() {
+        return head;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public Body.Bone getBones() {
+        return bones;
+    }
 
     public void setLanguages(Language... languages) {
         this.languages.addAll(Arrays.asList(languages));
@@ -77,6 +97,11 @@ public class Human extends Creature implements Eater, Interactable {
     @Override
     public void voice(String str) {
         System.out.println(name + " сказал: " + str);
+        if (this.location.hasEcho()) {
+            if (Math.random() < 0.5d) {
+                System.out.println("Звук отразился и " + this + " услышал эхо");
+            }
+        }
     }
 
     public void sayTo(String phrase,Human human) {
@@ -203,7 +228,7 @@ public class Human extends Creature implements Eater, Interactable {
     @Override
     public void sleep() {
         if (Math.random() < 0.4d) {
-            characteristics.add(Characteristics.SLEEP);
+            conditions.add(Conditions.SLEEP);
         }
         else {
             System.out.println(this + " тщетно пытался заснуть");
@@ -212,13 +237,13 @@ public class Human extends Creature implements Eater, Interactable {
 
     @Override
     public boolean isSleeping() {
-        return characteristics.contains(Characteristics.SLEEP);
+        return conditions.contains(Conditions.SLEEP);
     }
 
     @Override
     public void wakeUp() {
         if (Math.random() < 0.4d) {
-            characteristics.remove(Characteristics.SLEEP);
+            conditions.remove(Conditions.SLEEP);
             System.out.println(this + " проснулся");
         }
         else {
@@ -268,14 +293,14 @@ public class Human extends Creature implements Eater, Interactable {
     }
 
     public void fallOnKnees() {
-        this.body.legs.bend();
-        this.addTypes(Characteristics.KNEELING);
+        this.body.getLegs().bend();
+        this.setConditions(Conditions.KNEELING);
     }
 
     @Override
     public void moveTo(Location place) {
-        if (this.hasType(Characteristics.KNEELING)) {
-            System.out.println(this + "не может идти, он" + Characteristics.KNEELING);
+        if (this.conditions.contains(Conditions.KNEELING)) {
+            System.out.println(this + "не может идти, он" + Conditions.KNEELING);
         }
         else {
             getLocation().removeCreatures(this);

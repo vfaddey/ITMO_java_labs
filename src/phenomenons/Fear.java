@@ -26,9 +26,9 @@ public class Fear extends Phenomenon implements Hitter {
             creature.addTypes(Characteristics.SCARED);
             for (Creature person : getLocation().getCreatures()) {
                 if (person instanceof Human) {
-                    ((Human) person).bones.tremble();
-                    ((Human) person).bones.crawl();
-                    ((Human) person).bones.move();
+                    ((Human) person).getBones().tremble();
+                    ((Human) person).getBones().crawl();
+                    ((Human) person).getBones().move();
                 }
             }
         }

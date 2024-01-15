@@ -14,7 +14,7 @@ import java.util.Objects;
 public abstract class Creature implements Position {
     protected String name;
     protected int age;
-    private Location location;
+    protected Location location;
     protected ArrayList<Characteristics> characteristics = new ArrayList<>();
     protected Creature lookOnCreature;
     protected Item lookOnItem;
@@ -112,13 +112,13 @@ public abstract class Creature implements Position {
         return Objects.hash(name);
     }
 
-    protected abstract void voice(String str);
+    public abstract void voice(String str);
     protected abstract boolean hears(Creature creature);
     public abstract void look(Creature creature);
     public abstract void look(Item item);
     public abstract void look(BodyPart bodyPart);
-    protected abstract void sleep();
-    protected abstract void wakeUp();
+    public abstract void sleep();
+    public abstract void wakeUp();
     protected abstract boolean isSleeping();
 
 }

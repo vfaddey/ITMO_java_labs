@@ -13,6 +13,7 @@ public class Location {
     private ArrayList<Creature> creatures = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Phenomenon> phenomenons = new ArrayList<>();
+    private boolean echo = false;
 
     public Location(String name) {
         this.name = name;
@@ -25,6 +26,9 @@ public class Location {
 
     public void removeItem(Item item) {
         items.remove(item);
+    }
+    public boolean hasEcho() {
+        return echo;
     }
 
     public void placeItem(Item item) {

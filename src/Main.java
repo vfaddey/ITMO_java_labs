@@ -94,9 +94,9 @@ public class Main {
         brushwood.transformInto(pileOfBones);
         weather.getState();
         luis.fallOnKnees();
-        luis.show(paskou, luis.bones);
+        luis.show(paskou, luis.getBones());
         luis.voice("Ты должен закричать, чтобы проснуться; неважно, что ты скажешь Рэчел, Элли, Гэджу, соседям, ты должен закричать, чтобы проснуться.  Закричатьчтобыпроснутьсязакричатьчтобы..");
-        luis.head.face.hit();
+        luis.getHead().face.hit();
         paskou.sayTo("Я пришел как друг", luis);
 
         try {
