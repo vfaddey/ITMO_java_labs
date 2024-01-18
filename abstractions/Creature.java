@@ -3,19 +3,17 @@ package abstractions;
 import enums.Characteristics;
 import base.Location;
 import exceptions.InvalidAgeException;
-import exceptions.LocationException;
-import interfaces.Interactable;
 import interfaces.Position;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 
 public abstract class Creature implements Position {
     protected String name;
     protected int age;
     protected Location location;
-    protected ArrayList<Characteristics> characteristics = new ArrayList<>();
+    protected HashSet<Characteristics> characteristics = new HashSet<>();
     protected Creature lookOnCreature;
     protected Item lookOnItem;
     protected BodyPart lookOnBodyPart;
@@ -27,7 +25,7 @@ public abstract class Creature implements Position {
             setAge(age);
         }
         catch (InvalidAgeException e) {
-            System.out.println(e);
+            System.out.println(e.toString());
             setAge(18);
         }
         this.location = loc;
@@ -40,7 +38,7 @@ public abstract class Creature implements Position {
             setAge(age);
         }
         catch (InvalidAgeException e) {
-            System.out.println(e);
+            System.out.println(e.toString());
             setAge(18);
         }
         this.characteristics.addAll(Arrays.asList(characteristics));
@@ -54,8 +52,9 @@ public abstract class Creature implements Position {
     private void setAge(int age) throws InvalidAgeException {
         if (age < 0) {
             throw new InvalidAgeException("Возраст не может быть меньше нуля");
-        }
-        else {
+        } else if (age > 200) {
+            throw new InvalidAgeException("Возраст не модет быть больше 200");
+        } else {
             this.age = age;
         }
     }
@@ -65,30 +64,30 @@ public abstract class Creature implements Position {
     }
 
     public void addTypes(Characteristics... characteristics) {
-        
-        
         if (characteristics.length == 1) {
-            System.out.println(this + " " + characteristics[0]);
-        }
-        else {
-            System.out.print(this + " ");
+            if (!this.characteristics.contains(characteristics[0])) {
+                this.characteristics.add(characteristics[0]);
+                System.out.println(this + " " + characteristics[0]);
+            }
+        } else {
+            System.out.println(this + " ");
             for (Characteristics characteristic : characteristics) {
-                System.out.print(characteristic + ", ");
+                if (!this.characteristics.contains(characteristic)) {
+                    this.characteristics.add(characteristic);
+                    System.out.print(characteristic + ", ");
+                }
             }
             System.out.println();
         }
     }
 
-    public void setTypes(Characteristics... characteristics) {
-        this.characteristics = (ArrayList<Characteristics>) Arrays.asList(characteristics);
-    }
 
     public boolean hasType(Characteristics characteristic) {
         return characteristics.contains(characteristic);
     }
 
     public void removeTypes(Characteristics... characteristics) {
-        this.characteristics.removeAll(Arrays.asList(characteristics));
+        Arrays.asList(characteristics).forEach(this.characteristics::remove);
         if (characteristics.length == 1)
             System.out.println(name + " больше не " + characteristics[0]);
         else {
@@ -120,6 +119,6 @@ public abstract class Creature implements Position {
     public abstract void look(BodyPart bodyPart);
     public abstract void sleep();
     public abstract void wakeUp();
-    protected abstract boolean isSleeping();
+
 
 }

@@ -8,18 +8,17 @@ import enums.ItemType;
 import enums.Language;
 import enums.WeatherType;
 import exceptions.InvalidAgeException;
+import exceptions.LanguageException;
 import exceptions.LocationException;
 import items.*;
 import phenomenons.Fear;
 import weather.Weather;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws LocationException, InvalidAgeException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static void main(String[] args) throws LocationException, InvalidAgeException {
 
         class World {
             private final String name;
@@ -70,12 +69,17 @@ public class Main {
         Item memorial = new Item("памятник") {
             @Override
             public boolean isInteractable() {
-                return false;
+                return true;
             }
 
             @Override
             public void interact(Creature creature) {
                 System.out.println(this + "повалился на землю");
+                if (Math.random() < 0.2d) {
+                    if (creature instanceof Human) {
+                        ((Human) creature).getBody().getLegs().hit();
+                    }
+                }
             }
         };
         memorial.setType(ItemType.HEAVY);
@@ -98,14 +102,20 @@ public class Main {
 
         try {
             luis.show(paskou, memorial);
-        }
-        catch (LocationException e) {
+        } catch (LocationException e) {
             System.out.println(e.toString());
         }
-        paskou.sayToOnLanguage("*что то*", luis, Language.UNKNOWN);
-        luis.touch(memorial);
 
+        try {
+            paskou.sayToOnLanguage("*что то*", luis, Language.UNKNOWN);
+        } catch (LanguageException e) {
+            System.out.println(e.toString());
+        }
+
+        luis.touch(memorial);
         world.spin();
 
+
+        if (paskou.knowsLanguage(Language.UNKNOWN)) System.out.println("yes");
     }
 }

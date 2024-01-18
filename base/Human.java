@@ -10,6 +10,7 @@ import enums.Conditions;
 import enums.ItemType;
 import enums.Language;
 import exceptions.InvalidAgeException;
+import exceptions.LanguageException;
 import exceptions.LocationException;
 import interfaces.Eater;
 import interfaces.Interactable;
@@ -19,14 +20,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 
 
 public class Human extends Creature implements Eater, Interactable {
 
     private final ArrayList<Item> inventory = new ArrayList<>();
-    private final ArrayList<Conditions> conditions = new ArrayList<>();
-    private final ArrayList<Language> languages = new ArrayList<>();
+    private final HashSet<Conditions> conditions = new HashSet<>();
+    private final HashSet<Language> languages = new HashSet<>();
     private final Body.Bone bones = new Body.Bone("кости", this);
     private final Body body = new Body("тело", this);
     private final Head head = new Head("голова", this);
@@ -40,7 +42,7 @@ public class Human extends Creature implements Eater, Interactable {
         super(name, age, characteristics);
     }
 
-    public ArrayList<Conditions> getConditions() {
+    public HashSet<Conditions> getConditions() {
         return conditions;
     }
 
@@ -67,8 +69,7 @@ public class Human extends Creature implements Eater, Interactable {
         return this.languages.contains(language);
     }
 
-
-    public void lough() {
+    public void laugh() {
         if (characteristics.contains(Characteristics.HAPPY)) {
             System.out.println(name + " громко посмеялся");
         }
@@ -115,7 +116,10 @@ public class Human extends Creature implements Eater, Interactable {
         }
     }
 
-    public void sayToOnLanguage(String phrase, Human human, Language language) {
+    public void sayToOnLanguage(String phrase, Human human, Language language) throws LanguageException {
+        if (!this.knowsLanguage(language)) {
+            throw new LanguageException(this + " не знает этого языка");
+        }
         if (human.knowsLanguage(language)) {
             if (human.hears(this)) {
                 System.out.println(this + " сказал на " + language + " языке " + human + "у: " + phrase);
@@ -231,21 +235,19 @@ public class Human extends Creature implements Eater, Interactable {
     public void sleep() {
         if (Math.random() < 0.4d) {
             conditions.add(Conditions.SLEEP);
+            this.getHead().eyes.close();
         }
         else {
             System.out.println(this + " тщетно пытался заснуть");
         }
     }
 
-    @Override
-    public boolean isSleeping() {
-        return conditions.contains(Conditions.SLEEP);
-    }
 
     @Override
     public void wakeUp() {
         if (Math.random() < 0.4d) {
             conditions.remove(Conditions.SLEEP);
+            this.getHead().eyes.open();
             System.out.println(this + " проснулся");
         }
         else {

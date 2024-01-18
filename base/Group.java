@@ -49,9 +49,9 @@ public class Group implements Position {
         if (!(object instanceof Group otherGroup)) return false;
         if (this.people.size() != otherGroup.people.size()) return false;
         int sumThis = 0, sumOther = 0;
-        for (int i = 0; i < people.size(); i++) {
-            sumThis += this.people.get(i).hashCode();
-            sumOther += this.people.get(i).hashCode();
+        for (Human person : people) {
+            sumThis += person.hashCode();
+            sumOther += person.hashCode();
         }
         return sumThis == sumOther;
     }

@@ -10,8 +10,8 @@ import enums.ItemType;
 
 public class Body extends BodyPart {
 
-    private Hands hands = new Hands("руки", 2, getOwner(), false);
-    private Legs legs = new Legs("ноги", getOwner());
+    private final Hands hands = new Hands("руки", 2, getOwner(), false);
+    private final Legs legs = new Legs("ноги", getOwner());
     private boolean isHeated;
 
     public Body(String name, Creature owner) {
